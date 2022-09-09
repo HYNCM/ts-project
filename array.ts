@@ -54,3 +54,188 @@ function logArrayElements(element, index, array) {
   console.log("a[" + index + "] = " + element);
 }
 [2, 5, , 9].forEach(logArrayElements);
+
+//计算两点的距离
+function distance(x1, y1, x2, y2) {
+  var a = x1 - x2;
+  var b = y1 - y2;
+  return Math.sqrt(a * a + b * b);
+}
+console.log(distance(1, 1, 2, 3));
+
+//计算多边形的面积
+function area(points) {
+  var i,
+    j,
+    area = 0;
+  for (i = 0; i < points.length; i++) {
+    j = (i + 1) % points.length;
+    area += points[i].x * points[j].y;
+    area -= points[i].y * points[j].x;
+  }
+  area /= 2;
+  return area;
+}
+console.log(
+  area([
+    { x: 0, y: 0 },
+    { x: 3, y: 0 },
+    { x: 3, y: 4 },
+    { x: 0, y: 4 },
+  ])
+);
+
+//计算多边形的周长
+function perimeter(points) {
+  var i,
+    j,
+    dist,
+    perimeter = 0;
+  for (i = 0; i < points.length; i++) {
+    j = (i + 1) % points.length;
+    dist = distance(points[i].x, points[i].y, points[j].x, points[j].y);
+    perimeter += dist;
+  }
+  return perimeter;
+}
+console.log(
+  perimeter([
+    { x: 0, y: 0 },
+    { x: 3, y: 0 },
+    { x: 3, y: 4 },
+    { x: 0, y: 4 },
+  ])
+);
+
+//计算多边形的中心点
+function centroid(points) {
+  var i,
+    j,
+    f,
+    x,
+    y,
+    centroidX = 0,
+    centroidY = 0,
+    area = 0;
+  for (i = 0; i < points.length; i++) {
+    j = (i + 1) % points.length;
+    f = points[i].x * points[j].y - points[j].x * points[i].y;
+    x = (points[i].x + points[j].x) * f;
+    y = (points[i].y + points[j].y) * f;
+    centroidX += x;
+    centroidY += y;
+    area += f * 3;
+  }
+  area = area / 2;
+  centroidX = centroidX / area;
+  centroidY = centroidY / area;
+  return { x: centroidX, y: centroidY };
+}
+console.log(
+  centroid([
+    { x: 0, y: 0 },
+    { x: 3, y: 0 },
+    { x: 3, y: 4 },
+    { x: 0, y: 4 },
+  ])
+);
+
+//计算多边形的重心
+function barycenter(points) {
+  var i,
+    x = 0,
+    y = 0;
+  for (i = 0; i < points.length; i++) {
+    x += points[i].x;
+    y += points[i].y;
+  }
+  x /= points.length;
+  y /= points.length;
+  return { x: x, y: y };
+}
+console.log(
+  barycenter([
+    { x: 0, y: 0 },
+    { x: 3, y: 0 },
+    { x: 3, y: 4 },
+    { x: 0, y: 4 },
+  ])
+);
+
+//计算多边形的内切圆
+function incircle(points) {
+  var a, b, c, d, e, f, g, h, i, j, k, x, y;
+  a = points[0].x - points[2].x;
+  b = points[1].x - points[2].x;
+  c = points[0].y - points[2].y;
+  d = points[1].y - points[2].y;
+  e = a * (points[0].x + points[2].x) + c * (points[0].y + points[2].y);
+  f = b * (points[1].x + points[2].x) + d * (points[1].y + points[2].y);
+  g = 2 * (a * (points[2].y - points[1].y) - c * (points[2].x - points[1].x));
+  if (g == 0) {
+    return false;
+  }
+  x = (d * e - b * f) / g;
+  y = (a * f - c * e) / g;
+  return { x: x, y: y };
+}
+console.log(
+  incircle([
+    { x: 0, y: 0 },
+    { x: 3, y: 0 },
+    { x: 3, y: 4 },
+    { x: 0, y: 4 },
+  ])
+);
+
+//计算多边形的外接圆
+function circumcircle(points) {
+  var a, b, c, d, e, f, g, h, i, j, k, x, y;
+  a = points[0].x - points[2].x;
+  b = points[1].x - points[2].x;
+  c = points[0].y - points[2].y;
+  d = points[1].y - points[2].y;
+  e = a * (points[0].x + points[2].x) + c * (points[0].y + points[2].y);
+  f = b * (points[1].x + points[2].x) + d * (points[1].y + points[2].y);
+  g = 2 * (a * (points[2].y - points[1].y) - c * (points[2].x - points[1].x));
+  if (g == 0) {
+    return false;
+  }
+  x = (d * e - b * f) / g;
+  y = (a * f - c * e) / g;
+  return { x: x, y: y };
+}
+console.log(
+  circumcircle([
+    { x: 0, y: 0 },
+    { x: 3, y: 0 },
+    { x: 3, y: 4 },
+    { x: 0, y: 4 },
+  ])
+);
+
+//计算多边形的内切圆半径
+function incircleRadius(points) {
+  var a, b, c, d, e, f, g, h, i, j, k, x, y;
+  a = points[0].x - points[2].x;
+  b = points[1].x - points[2].x;
+  c = points[0].y - points[2].y;
+  d = points[1].y - points[2].y;
+  e = a * (points[0].x + points[2].x) + c * (points[0].y + points[2].y);
+  f = b * (points[1].x + points[2].x) + d * (points[1].y + points[2].y);
+  g = 2 * (a * (points[2].y - points[1].y) - c * (points[2].x - points[1].x));
+  if (g == 0) {
+    return false;
+  }
+  x = (d * e - b * f) / g;
+  y = (a * f - c * e) / g;
+  return distance(x, y, points[0].x, points[0].y);
+}
+console.log(
+  incircleRadius([
+    { x: 0, y: 0 },
+    { x: 3, y: 0 },
+    { x: 3, y: 4 },
+    { x: 0, y: 4 },
+  ])
+);
