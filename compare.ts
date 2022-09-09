@@ -1,0 +1,16 @@
+var num1:number = 10;
+var num2:number = 20;
+console.log("num1 的值为 " + num1);
+console.log("num2 的值为 " + num2);
+var result=num1>num2;
+console.log("num1 > num2 的结果为 " + result);
+result=num1<num2;
+console.log("num1 < num2 的结果为 " + result);
+result=num1>=num2;
+console.log("num1 >= num2 的结果为 " + result);
+result=num1<=num2;
+console.log("num1 <= num2 的结果为 " + result);
+result=num1==num2;
+console.log("num1 == num2 的结果为 " + result);
+result=num1!=num2;
+console.log("num1 != num2 的结果为 " + result);
