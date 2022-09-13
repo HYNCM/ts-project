@@ -1,6 +1,6 @@
-function disp(x, y) {
+function displ(x, y) {
     console.log(x);
     console.log(y);
 }
-disp("abc");
-disp(1, "xyz");
+displ("abc");
+displ(1, "xyz");
